@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harrison Siegel Home Page</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 22px;
+        }
+        h2 {
+            color: #333;
+            font-size: 18px
+        }
+
+        p {
+            color: #555;
+            font-size: 12px;
+        }
+        .carousel-container {
+            max-width: 600px; /* Adjust this to fit your desired image size */
+            position: relative;
+            margin: auto; /* Centers the carousel on the page */
+            border: 2px solid #ddd;
+            background-color: #fff; /* White background behind images */
+        }
+
+        /* Hide all slides by default */
+        .carousel-slide {
+            display: none;
+        }
+
+        /* Make images responsive so they fit the container */
+        .carousel-slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Show the active slide */
+        .active-slide {
+            display: block;
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(0,0,0,0.3); /* Semi-transparent background */
+            border: none; /* Removes default button border */
+        }
+
+        /* Position the "next button" to the right */
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        /* On hover, add a black background color with a little bit see-through */
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+    </style>
+</head>
+<body>
+    <h1>Harrison Siegel</h1>
+    <p>Welcome to my webpage, here you can find my contact information, resume, my past work, and what I am actively working
+        on.
+    </p>
+    <h2>Current Work</h2>
+    <div class="carousel-container">
+        <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(1)">&#10095;</button>
+
+        <div class="carousel-slide active-slide">
+            <img src= "Lab 6 Q1.jpg"alt="Linear Modeling Visuals">
+        </div>
+        <div class="carousel-slide">
+            <img src="Lab 5 Q2.2.jpg" alt="Scatter Plot">
+        </div>
+        <div class="carousel-slide">
+            <img src="Walking Time To Grocery.jpg" alt="Walking Time In Decatur">
+        </div>
+        <div class="carousel-slide">
+            <img src="Zoning-Decatur.jpg" alt="Zoning Within Decatur">
+        </div>
+    </div>
+    <script>
+        let currentSlideIndex = 0;
+        showSlides(currentSlideIndex);
+        function changeSlide(n) {
+            showSlides(currentSlideIndex += n);
+        }
+        function showSlides(n) {
+            let slides = document.getElementsByClassName("carousel-slide");
+            if (n >= slides.length) { currentSlideIndex = 0 }
+            if (n < 0) { currentSlideIndex = slides.length - 1 }
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[currentSlideIndex].style.display = "block";
+        }
+    </script>
+</body>
+</html>
