@@ -87,7 +87,7 @@
         <button class="next" onclick="changeSlide(1)">&#10095;</button>
 
         <div class="carousel-slide active-slide">
-            <img src= "Lab 6 Q1.jpg"alt="Linear Modeling Visuals">
+            <img src="Lab 6 Q1.jpg" alt="Linear Modeling Visuals">
         </div>
         <div class="carousel-slide">
             <img src="Lab 5 Q2.2.jpg" alt="Scatter Plot">
