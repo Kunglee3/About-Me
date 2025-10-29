@@ -11,18 +11,40 @@
         }
 
         h1 {
-            color: #333;
+            color: #ffffff;
             font-size: 22px;
         }
         h2 {
-            color: #333;
+            color: #ffffff;
             font-size: 18px
         }
 
         p {
-            color: #555;
+            color: #ffffff;
             font-size: 16px;
         }
+
+        .clearfix {
+            clear: both;
+        }
+
+        body {
+            background-image: linear-gradient(
+        to right,   /* Gradient runs from left to right */
+        black 100%,  /* Left half: black */
+        rgb(79, 168, 228) 0%    /* Right half: gold */
+            );background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .image-left {
+            float: left;
+            width: 300px;
+            height: auto;
+            margin-right: 20px;
+            margin-bottom: 10px;
+        }
+
         .carousel-container {
             max-width: 600px; /* Adjust this to fit your desired image size */
             position: relative;
@@ -78,6 +100,7 @@
 </head>
 <body>
     <h1>Harrison Siegel</h1>
+    <img src="Headshot.jpg" alt="Headshot">
     <p>Welcome to my webpage, here you can find my contact information, resume, my past work, and what I am actively working
         on.
     </p>
@@ -92,6 +115,7 @@
         we host events, workshops, class events, and much more.
     </p>
     <p>
+        <img src="KTC_Meeting_1.jpg" alt="KTC Meeting Post" class="image-left">
         In my professional career I have interned with the Kentucky Transportation Cabinet, the Kentucky Public Pension 
         Authority, and Cenergistic. While working with the transportation cabinet I was working as a state highway engineering
         intern. Some of my work included the planning of a BRT route in Louisville, Kentucky, work on wrong way driving prevention
@@ -106,6 +130,7 @@
         I have experience with R studio, ArcGIS, Tableau, HTML, Microsoft Office, ArcPy, and Google Suite. I am 
         currently looking for any oppertunity to work in the field within the Atlanta area.
     </p>
+    <div class="clearfix"></div>
     <h2>Contact Information</h2>
     <p>
         Phone: 859-619-2950
@@ -119,9 +144,9 @@
         <a href="Harrison Siegel Resume (1).pdf" download>Download Resume(PDF)</a>
     </p>
     <h2>Current Work</h2>
-    <div class="carousel-container">
-        <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
-        <button class="next" onclick="changeSlide(1)">&#10095;</button>
+    <div id="current-work-carousel" class="carousel-container">
+        <button class="prev" onclick="changeSlide('current-work-carousel', -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide('current-work-carousel', 1)">&#10095;</button>
 
         <div class="carousel-slide active-slide">
             <img src="Lab 6 Q1.jpg" alt="Linear Modeling Visuals">
@@ -137,9 +162,9 @@
         </div>
     </div>
     <h2>Previous Work</h2>
-    <div class="carousel-container">
-        <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
-        <button class="next" onclick="changeSlide(1)">&#10095;</button>
+    <div id="previous-work-carousel" class="carousel-container">
+        <button class="prev" onclick="changeSlide('previous-work-carousel', -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide('previous-work-carousel', 1)">&#10095;</button>
 
         <div class="carousel-slide active-slide">
             <img src="" alt="">
@@ -155,20 +180,31 @@
         </div>
     </div>
     <script>
-        let currentSlideIndex = 0;
-        showSlides(currentSlideIndex);
-        function changeSlide(n) {
-            showSlides(currentSlideIndex += n);
+        let slideIndexes = {
+            "current-work-carousel": 0,
+            "previous-work-carousel": 0
+    };
+        showSlides("current-work-carousel", 0);
+        showSlides("previous-work-carousel", 0);
+        function changeSlide(carouselId, n) {
+            let newIndex = slideIndexes[carouselId] + n;
+        showSlides(carouselId, newIndex);
+    }
+        function showSlides(carouselId, n) {
+            let carousel = document.getElementById(carouselId);
+            let slides = carousel.getElementsByClassName("carousel-slide");
+            if (n >= slides.length) {
+            n = 0;
         }
-        function showSlides(n) {
-            let slides = document.getElementsByClassName("carousel-slide");
-            if (n >= slides.length) { currentSlideIndex = 0 }
-            if (n < 0) { currentSlideIndex = slides.length - 1 }
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slides[currentSlideIndex].style.display = "block";
+        if (n < 0) {
+            n = slides.length - 1;
         }
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slides[n].style.display = "block";
+        slideIndexes[carouselId] = n;
+    }
     </script>
 </body>
 </html>
